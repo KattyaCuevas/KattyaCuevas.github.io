@@ -5,6 +5,8 @@ published: true
 description: Introducción a ReactNative con Expo
 date: 2020-06-21T00:00:00.000Z
 tags: react react-native expo
+header:
+  og_image: /assets/images/articles/mi-primera-app-con-react-native.png
 ---
 
 [React Native](https://reactnative.dev/) es un framework para desarrollar aplicaciones nativas iOS y Android con React. Hay dos formas de empezar una aplicación con React Native, la primera es usando el CLI (línea de comandos) de react-native y la segunda es usando el CLI de Expo.

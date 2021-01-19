@@ -6,6 +6,8 @@ description: "{Rails + JSONAPI::Resources} & {React.js + Formik}"
 date: 2019-10-10T00:00:00.000Z
 tags: ruby rails react formik
 canonical_url: https://dev.to/able/building-and-consuming-a-json-api-with-rails-and-react-42p6
+header:
+  og_image: /assets/images/articles/building-and-consuming-a-json-api-with-rails-and-react.png
 ---
 
 When I thought about how to build an API, I started to search for what is the "best way" to do it. I found that exists specifications to build an API, you can found it here https://jsonapi.org. There, you would found a list of "rules" which we have to follow about how to send and receive data in an API.
