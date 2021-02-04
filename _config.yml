@@ -20,7 +20,7 @@ title                    : "Kattya Cuevas"
 title_separator          : "-"
 subtitle                 : # site tagline that appears below site title in masthead
 name                     : "Kattya Cuevas"
-description              : "Personal website"
+description              : "Kattya Cuevas's Personal website"
 url                      : "https://kattya.dev" # the base hostname & protocol for your site e.g. "https://mmistakes.github.io"
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
@@ -89,9 +89,9 @@ social:
 
 # Analytics
 analytics:
-  provider               : false # false (default), "google", "google-universal", "google-gtag", "custom"
+  provider               : "google" # false (default), "google", "google-universal", "google-gtag", "custom"
   google:
-    tracking_id          :
+    tracking_id          : UA-159628921-1
     anonymize_ip         : # true, false (default)
 
 
@@ -99,7 +99,7 @@ analytics:
 author:
   name             : "Kattya Cuevas"
   avatar           : "/assets/images/bio-photo.jpg"
-  bio              : "👩‍👦 Salva's mom<br /> 👩‍💻 Software engineer at [**Able.co**](https://able.co)<br /> 🗣️ Organizer at [**RubyPeru**](http://ruby.pe) and [**Tech Talks**](https://techtalks.pe)<br /> 👩‍🔧 [**WTM Lima**](https://twitter.com/WTMLima) Ambassador"
+  bio              : "👩‍👦 Salva's mom<br /> 👩‍💻 Software engineer<br /> 🗣️ Organizer at [**Ruby Peru**](http://ruby.pe) and [**Tech Talks**](https://techtalks.pe)<br /> 👩‍🔧 [**WTM Lima**](https://twitter.com/WTMLima) Ambassador"
   location         : "Lima, Perú"
   email            : "kattya.cuevas@gmail.com"
   links:
