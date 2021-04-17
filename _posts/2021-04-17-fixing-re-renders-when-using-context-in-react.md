@@ -57,8 +57,7 @@ function App() {
 }
 ```
 
-I added a console.log to my components to
-To make you aware of my error, I added a console.log to my components so that they see how many times it was rendered:
+I added a console.log to my components to make you aware of my error, I added a console.log to my components so that they see how many times it was rendered:
 ![](https://media.giphy.com/media/y2S7LixprI0B4ruvLF/giphy.gif)
 
 There you can see, when I update the counter, it re-renders the `SessionForm` component. Even when it doesn't depend on the `CounterContext` context, which has `counter` state.
