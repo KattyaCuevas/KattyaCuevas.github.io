@@ -98,7 +98,7 @@ analytics:
 # Site Author
 author:
   name             : "Kattya Cuevas"
-  avatar           : "/assets/images/bio-photo.jpg"
+  avatar           : "/assets/images/bio-photo.png"
   bio              : "👩‍👦 Salva's mom<br /> 👩‍💻 Software engineer<br /> 🗣️ Organizer at [**Ruby Peru**](http://ruby.pe) and [**Tech Talks**](https://techtalks.pe)<br /> 👩‍🔧 [**WTM Lima**](https://twitter.com/WTMLima) Ambassador"
   location         : "Lima, Perú"
   email            : "kattya.cuevas@gmail.com"
