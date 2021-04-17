@@ -1,5 +1,5 @@
 ---
-title: Videos and Podcasts en los que he participado
+title: Videos and Podcasts I've been part of
 layout: collection
 permalink: /media/
 collection: media

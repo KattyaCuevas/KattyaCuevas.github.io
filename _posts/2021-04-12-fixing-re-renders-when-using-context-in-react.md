@@ -1,6 +1,6 @@
 ---
 layout: single
-title: Improving the use of the contexts in React
+title: Fixing re-renders when using Context in React
 published: true
 description: TIL how to set well the contexts in React.
 date: 2021-04-12T00:00:00.000Z
@@ -69,7 +69,7 @@ function App() {
   const [state, setState] = React.useState(false);
 
   return (
-    <MyContext.Provider value={{ state, setState }}>
+    <MyContext.Provider value={ { state, setState } }>
       <MyCustomComponent />
     </MyContext.Provider>
   );
@@ -83,7 +83,7 @@ function MyContextProvider({ children }) {
   const [state, setState] = React.useState(false);
 
   return (
-    <MyContext.Provider value={{ state, setState }}>
+    <MyContext.Provider value={ { state, setState } }>
       {children}
     </MyContext.Provider>
   );

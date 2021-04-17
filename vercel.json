@@ -1,0 +1,16 @@
+{
+  "redirects": [
+    {
+      "source": "/2019-10-10-building-and-consuming-a-json-api-with-rails-and-react",
+      "destination": "/articles/2019-10-10-building-and-consuming-a-json-api-with-rails-and-react"
+    },
+    {
+      "source": "/2020-06-21-mi-primera-app-con-react-native",
+      "destination": "/articles/2020-06-21-mi-primera-app-con-react-native"
+    },
+    {
+      "source": "/2021-02-04-como-me-afecto-la-experiencia-universitaria",
+      "destination": "/articles/2021-02-04-como-me-afecto-la-experiencia-universitaria"
+    }
+  ]
+}
