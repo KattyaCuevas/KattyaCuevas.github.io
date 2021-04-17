@@ -9,10 +9,10 @@ header:
   og_image: /assets/images/articles/evitar-re-renders-al-usar-context-en-react.png
 ---
 
-> English version [here](/articles/2021-04-17-fixing-re-renders-when-using-context-in-react)
-
 Hace algunos meses, estaba haciendo un refactor en un proyecto de React y me quedé horas intentando resolver el problema. El refactor se debía a un problema típico de proyectos de React, pasar muchos props a los componentes hijos para así pasarlos a los hijos de estos y así.
 Cuando este tipo de situaciones pasa, al querer actualizar alguno de los componentes o quizá solo quieras reutilizarlos en alguna otra parte, te obliga a tener información en tu nuevo componente que no necesitas en ese momento.
+
+> English version [here](/articles/2021-04-17-fixing-re-renders-when-using-context-in-react)
 
 En fin, al terminar el refactor, separé la información en varios contextos, para así solo compartir la data necesaria con los componentes que lo necesitaban. Aunque suena como un refactor exitoso, no lo era, mis componentes se seguían actualizando cuando actualizaba un estado de un contexto del que no dependían. No tiene sentido, ¿verdad?
 
