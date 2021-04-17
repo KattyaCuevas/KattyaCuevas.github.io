@@ -1,12 +1,12 @@
 ---
 layout: single
-title: Fixing re-renders when using Context in React
+title: Fixing Re-Renders When Using Context in React
 published: true
-description: TIL how to set well the contexts in React.
-date: 2021-04-12T00:00:00.000Z
-tags: react TIL
-# header:
-#   og_image: /assets/images/articles/como-me-afecto-la-experiencia-universitaria.png
+description: How to fix re-renders when using Context in React.
+date: 2021-04-17T00:00:00.000Z
+tags: react
+header:
+  og_image: /assets/images/articles/fixing-re-renders-when-using-context-in-react.png
 ---
 
 Some months ago, I was refactoring a React project, and I was stuck in one problem for hours. The refactor was because of a common problem in React projects: Pass a lot of props to the child components, then you have to pass them to the child of them, and so. When this happens, if you want to reuse those components on another part of the app, you have to get information in your new component that maybe you don't need to worry about that time.
@@ -15,14 +15,18 @@ I separated the data into many contexts, so I only share the necessary data with
 
 To explain my problem, I'll give you an example.
 I'll have 3 components:
+
 - `SessionForm`: Component to add a username. If you have already entered it, it shows a greeting and a button to log out (delete the username). If you haven't entered it, it shows you an entry to add it.
 - `SessionCounterMessage`: Component that shows a message with the username entered or a `You` and the number returned by a counter.
 - `CounterButtons`: Component with a counter and 2 buttons that allow you to add or subtract from the counter.
-And I'll have 2 contexts:
-- `CounterContext` with the `counter` state.
-- `SessionContext` with the `username` state.
- 
+
+Based on my first solution, I would create 2 contexts. One for the username (`SessionContext`) and one for the counter (` CounterContext`). Then the dependency of contexts of my components would look like this:
+- `SessionForm` depends on` SessionContext`
+- `CounterButtons` depends on` CounterContext`
+- `SessionCounterMessage` depends on` SessionContext` and `CounterContext`
+
 This was my initial solution:
+
 ```jsx
 function App() {
   const [currentUser, setCurrentUser] = React.useState(null);
@@ -32,13 +36,13 @@ function App() {
     <SessionContext.Provider
       value={React.useMemo(() => ({ currentUser, setCurrentUser }), [
         currentUser,
-        setCurrentUser
+        setCurrentUser,
       ])}
     >
       <CounterContext.Provider
         value={React.useMemo(() => ({ counter, setCounter }), [
           counter,
-          setCounter
+          setCounter,
         ])}
       >
         <SessionForm />
@@ -50,11 +54,11 @@ function App() {
 }
 ```
 
-I added a console.log to my components to 
+I added a console.log to my components to
 To make you aware of my error, I added a console.log to my components so that they see how many times it was rendered:
 ![](https://media.giphy.com/media/y2S7LixprI0B4ruvLF/giphy.gif)
 
-There you can see, when I update the counter, it re-renders the `SessionForm` component. Even when it doesn't depend on the `CounterContext` context, which has `counter` state. 
+There you can see, when I update the counter, it re-renders the `SessionForm` component. Even when it doesn't depend on the `CounterContext` context, which has `counter` state.
 And when I update the username, it re-renders the `CounterButtons` component. Even when it doesn't depend on the `SessionContext` context, which has `username` as a state.
 
 Now you see my code, do you find my mistake?
@@ -62,6 +66,7 @@ Well, I didn't find any mistakes in my code if I had separated them into differe
 
 What I did was ask for help. I asked @sergiodxa, who has been using React longer, and he said:
 This
+
 ```jsx
 const MyContext = React.useContext({});
 
@@ -69,13 +74,15 @@ function App() {
   const [state, setState] = React.useState(false);
 
   return (
-    <MyContext.Provider value={ { state, setState } }>
+    <MyContext.Provider value={{ state, setState }}>
       <MyCustomComponent />
     </MyContext.Provider>
   );
 }
 ```
+
 is different from this:
+
 ```jsx
 const MyContext = React.useContext({});
 
@@ -83,7 +90,7 @@ function MyContextProvider({ children }) {
   const [state, setState] = React.useState(false);
 
   return (
-    <MyContext.Provider value={ { state, setState } }>
+    <MyContext.Provider value={{ state, setState }}>
       {children}
     </MyContext.Provider>
   );
@@ -101,6 +108,7 @@ function App() {
 He didn't explain why at that time; maybe he was busy, I don't remember. But I realized that I was rendering my component in the same place that I created my states. Every time I updated the state, it re-rendered my parent component, which re-render all its children.
 
 With this in my mind, I'll change my initial example to check it works.
+
 ```jsx
 function SessionProvider({ children }) {
   const [currentUser, setCurrentUser] = React.useState(null);
@@ -109,7 +117,7 @@ function SessionProvider({ children }) {
     <SessionContext.Provider
       value={React.useMemo(() => ({ currentUser, setCurrentUser }), [
         currentUser,
-        setCurrentUser
+        setCurrentUser,
       ])}
     >
       {children}
@@ -124,7 +132,7 @@ function CounterProvider({ children }) {
     <CounterContext.Provider
       value={React.useMemo(() => ({ counter, setCounter }), [
         counter,
-        setCounter
+        setCounter,
       ])}
     >
       {children}
@@ -152,7 +160,4 @@ It works! No more unnecessary renders!
 
 It could look like a small change, and even you could think the user won't notice this change. But the components I was refactoring rendered audios and videos. Every time I updated the audios, the videos would be re-rendered, and it looks like a bug in the app.
 
-
 If you made it this far, thanks for reading. ❤️
-
-
