@@ -3,7 +3,7 @@ layout: single
 title: Evitar Re-Renders al usar Context en React 
 published: true
 description: Cómo solucionar los re-renders cuando estamos usando Context en React.
-date: 2021-04-17T00:00:00.000Z
+date: 2021-04-17T01:00:00.000Z
 tags: react
 header:
   og_image: /assets/images/articles/evitar-re-renders-al-usar-context-en-react.png
