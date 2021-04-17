@@ -9,6 +9,8 @@ header:
   og_image: /assets/images/articles/fixing-re-renders-when-using-context-in-react.png
 ---
 
+> Versión en español [aquí](/articles/2021-04-17-evitar-re-renders-al-usar-context-en-react)
+
 Some months ago, I was refactoring a React project, and I was stuck in one problem for hours. The refactor was because of a common problem in React projects: Pass a lot of props to the child components, then you have to pass them to the child of them, and so. When this happens, if you want to reuse those components on another part of the app, you have to get information in your new component that maybe you don't need to worry about that time.
 
 I separated the data into many contexts, so I only share the necessary data with the component that needs them. So I stopped to pass a lot of props in every component. Even that sounds like a successful refactor, it wasn't. My components keep updating when I updated an state of a context which they didn't depend on. It doesn't make sense, right?
