@@ -293,3 +293,16 @@ defaults:
       type: category
     values:
       comments: false
+  # _media
+  - scope:
+      path: ""
+      type: media
+    values:
+      layout: single
+      author_profile: false
+      share: true
+
+collections:
+  media:
+    output: true
+    permalink: /:collection/:path/
