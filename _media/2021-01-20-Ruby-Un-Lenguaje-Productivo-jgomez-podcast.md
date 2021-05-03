@@ -10,3 +10,4 @@ tags: ruby podcast
 En la temporada sobre lenguajes de programación del podcast de Juan Guillermo Gomez, estuve como invitada para hablar de Ruby. Hablamos del porqué Ruby es usado en muchas startups por su productividad, de sus características y algunos detalles de su última versión.
 
 <iframe src="https://anchor.fm/jggomez/embed/episodes/Ruby---Un-Lenguaje-Productivo---Con-Kattya-Cuevas-ep7224/a-a4d6vef" height="110" width="560" frameborder="0" scrolling="no"></iframe>
+<iframe width="560" height="315" src="https://www.youtube.com/embed/pQ8bIWzezUw" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
