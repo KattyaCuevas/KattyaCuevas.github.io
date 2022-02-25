@@ -3,7 +3,7 @@ layout: single
 title: Autenticación con Auth0 en Rails
 published: true
 description: "Qué es Autenticación? Cómo podemos hacerlo en Rails? En qué nos ayuda Auth0 para esto?"
-date: 2019-10-10T00:00:00.000Z
+date: 2022-02-25T00:00:00.000Z
 tags: ruby rails auth0 authentication
 ---
 
