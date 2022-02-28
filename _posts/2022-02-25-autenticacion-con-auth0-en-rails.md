@@ -7,6 +7,9 @@ date: 2022-02-25T00:00:00.000Z
 tags: ruby rails auth0 authentication
 ---
 
+Uno de los features más importantes que la mayoría de aplicaciones tienen en común es la Autenticación. 
+Hay muchas opciones de autenticarnos actualmente, les hablaré de una solución que se viene usando mucho últimamente: **Auth0** y cómo implementarlo en un proyecto en Rails.
+
 ## Auth0 como una solución de Autenticación
 
 ### ¿Autenticación?
@@ -160,4 +163,4 @@ Haremos una aplicación de prueba para integrar Auth0, esta aplicación solo ten
     <%= button_to "Logout", "auth/logout", method: :get, data: { turbo: false } %>
     ```
 
-Ahora probemos cómo funciona nuestra app!
+Probemos cómo funciona nuestra app y listo! Ya puedes implementar Auth0 en una aplicación hecha en Rails.
