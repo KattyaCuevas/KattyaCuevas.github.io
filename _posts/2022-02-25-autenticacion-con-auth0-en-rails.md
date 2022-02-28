@@ -28,7 +28,7 @@ En rails existen gemas para cada opción que queramos implementar. Pero, esto si
 Auth0 nos da una solución a esto. 
 Nos dará una forma segura de hacer solo una configuración en nuestra aplicación y a través de su plataforma elegir qué opciones (identity providers) queremos darle a nuestros usuarios. 
 Y si al inicio aún no sabemos qué opciones les podemos dar, las podríamos ir agregando con el tiempo sin necesidad de volver a cambiar nuestro código.
-Pueden encontrar un poco más de información sobre auth0 por aquí: [https://github.com/auth0/omniauth-auth0#what-is-auth0](https://github.com/auth0/omniauth-auth0#what-is-auth0)
+Pueden encontrar un poco más de información sobre Auth0 por aquí: [https://github.com/auth0/omniauth-auth0#what-is-auth0](https://github.com/auth0/omniauth-auth0#what-is-auth0)
 
 
 ## Demo Time!
@@ -89,7 +89,7 @@ Haremos una aplicación de prueba para integrar Auth0, esta aplicación solo ten
       get "failure", to: "auth0#failure"
     end
     ```
-- Creamos el controller para las acciones de auth0:
+- Creamos el controller para las acciones de Auth0:
   - touch app/controllers/auth0_controller.rb
 - Dentro del controller, vamos a definir las acciones `callback` y `failure`:
     ```rb
