@@ -4,7 +4,7 @@ title: Optimización de queries en Rails
 published: true
 description: "En ciertas ocasiones debemos optimizar nuestras consultas para que estas no se conviertan en el cuello de botella de nuestra aplicación"
 date: 2022-02-27T00:00:00.000Z
-tags: ruby rails active-record
+tags: ruby rails active-record benchmark
 ---
 
 **Contexto:** Hace un tiempo, trabajé en un proyecto en el que tenía que dar reportes de la data que teníamos, la mayoría de los reportes que teníamos que calcular estarían en el dashboard. Teníamos una cantidad regular de data que consultar y esta data estaba dividida en muchas tablas. Las consultas que hacíamos a la base de datos, tenían que estar optimizadas para que nuestra API no demore tanto en responder o a veces para que no muera.
@@ -29,7 +29,7 @@ Hay muchas formas de analizar tu código, aquí lo haré de 3 formas:
 - Memoria (memory): espacio en tu disco que ocupa este código al ejecutar
 - Iteraciones por segundo
 
-Para tener estas 3 formas de medir nuestro código, usaremos el módulo Benchmark que nos da ruby, y las gemas benchmark-ips y benchmark-memory
+Para tener estas 3 formas de medir nuestro código, usaremos el módulo `Benchmark` que nos da ruby, y las gemas `benchmark-ips` y `benchmark-memory`
 
 ## Primer Problema: Obtener el rating más alto en los albums
 
