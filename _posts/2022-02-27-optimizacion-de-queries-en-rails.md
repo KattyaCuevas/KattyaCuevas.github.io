@@ -190,3 +190,210 @@ Como vemos en los resultados, la primera solución es **1.44 veces** más rápid
 Entonces ¿por qué la segunda solución es la mejor?
 
 Porque se hace una sola llamada en la base de datos y toda la operación se hace desde el lado de la BD. Esto hace que la busqueda se haga más rápida al estar en contacto directo con la data.
+
+## Segundo problema: Top 10 canciones con su respectivos artistas que tienen el mayor rating
+
+### Posibles soluciones
+
+Esta vez tengo tres soluciones:
+**Primera solución**
+Usando métodos de Active Record y código de Ruby
+```rb
+ratings = Rating.where(votable_type: "Song").group(:votable_id).average(:vote)
+                .sort_by { |r| -r[1] }.take(n).to_h
+songs = Song.includes(:artists).find(ratings.keys)
+ratings.map do |song_id, rating|
+   song = songs.find { |song| song.id == song_id }
+   {
+       song: song.title,
+       artist: song.artists.map(&:name).join(", "),
+       rating_avg: rating.to_f
+   }
+end
+```
+
+**Segunda solución**
+Usando una sola query con muchos métodos de Active Record
+```rb
+Song.includes(:artists).joins(:ratings)
+   .select("songs.*, AVG(ratings.vote) as rating_avg")
+   .group("songs.id").order("rating_avg DESC").limit(n)
+   .map do |song|
+     {
+       song: song.title,
+       artist: song.artists.map(&:name).join(", "),
+       rating_avg: song.rating_avg
+     }
+   end
+```
+
+**Tercera solución**
+Usando dos queries con métodos de Active Record y poco código de Ruby
+```rb
+ratings = Rating.select("ratings.votable_id, AVG(ratings.vote) as rating_avg")
+                .where(votable_type: "Song")
+                .group(:votable_id).order("rating_avg DESC").limit(n)
+Song.includes(:artists).find(ratings.map(&:votable_id)).map do |song|
+ {
+   song: song.title,
+   artist: song.artists.map(&:name).join(", "),
+   rating_avg: ratings.find { |rating| rating.votable_id == song.id }.rating_avg
+ }
+end
+```
+
+### Analicemos la primera solución
+
+Para calcular las canciones con mayor rating, primero busco en la tabla ratings, los ratings que están relacionados con la tabla songs.
+
+Recuerden que la tabla ratings tenía una relación polimórfica con songs, por eso es que debemos buscar aquellos ratings cuyo `votable_type` es `Song`, así sabremos cuáles ratings son solo de songs. Luego vamos a agruparlos por `votable_id` (song.id) para poder sacar el `average` (promedio) de todos los ratings.
+```rb
+Rating.where(votable_type: "Song").group(:votable_id).average(:vote)
+```
+
+Esto nos devolverá un array de arrays de la siguiente forma: `[[votable_id, vote_avg], [votable_id, vote_avg]]`, con todos los ids de las canciones y el promedio de los ratings de estas.
+
+Lo que hará ahora es ordenarlos por el segundo elemento del array de forma descendente, tomar los `n` primeros elementos y convertirlo en un hash.
+```rb
+.sort_by { |r| -r[1] }.take(n).to_h
+```
+
+En la segunda parte, obtenemos las canciones del hash que acabamos de generar, incluyendo los artistas asociados.
+```rb
+songs = Song.includes(:artists).find(ratings.keys)
+```
+
+Por último iteramos sobre el hash de ratings para generar la data requerida. En cada iteración buscamos el song al que le pertenece el rating y con eso armamos el hash a retornar como resultado.
+```rb
+ratings.map do |song_id, rating|
+   song = songs.find { |song| song.id == song_id }
+   {
+       song: song.title,
+       artist: song.artists.map(&:name).join(", "),
+       rating_avg: rating.to_f
+   }
+end
+```
+
+### Analicemos la segunda solución
+
+En esta solución intenté obtener el mismo resultado haciendo solo una consulta a la base de datos.
+
+Primero haré una query sobre el `joins` de las tablas songs y ratings, para poder tener la data de ambas tablas. Usaré el método `includes(:artists)` para poder llamar a los artistas asociados a las canciones encontradas
+```rb
+Song.includes(:artists).joins(:ratings)
+```
+
+Sobre este `joins` vamos a pedir el `average` (por SQL gracias al método `select`) agrupados por `song.id`, luego ordenarlos por `rating_avg` y por último llamando solo a los `n` primeros records.
+```rb
+.select("songs.*, AVG(ratings.vote) as rating_avg") .group("songs.id").order("rating_avg DESC").limit(n)
+```
+
+Finalmente iteramos sobre este resultado, para armar el hash que debemos retornar como resultado
+```rb
+.map do |song|
+  {
+    song: song.title,
+    artist: song.artists.map(&:name).join(", "),
+    rating_avg: song.rating_avg
+  }
+end
+```
+
+### Analicemos la tercera solución
+
+Hacemos algo similar a la primera solución, pero no usamos el método `average` de `ActiveRecord`, sino lo haremos por SQL usando el método `select`. Hacemos el `group` para que se el cálculo se haga por canción, filtramos la busqueda a solo las canciones con el método `where`, y por último lo ordenamos y limitamos el resultado a los `n` primeros
+```rb
+ratings = Rating.select("ratings.votable_id, AVG(ratings.vote) as rating_avg")
+                .where(votable_type: "Song")
+                .group(:votable_id).order("rating_avg DESC").limit(n)
+```
+
+Luego buscamos los songs que de esos ratings que encontramos y le damos el formato que necesitamos para retornar el resultado esperado:
+```rb
+Song.includes(:artists).find(ratings.map(&:votable_id)).map do |song|
+ {
+   song: song.title,
+   artist: song.artists.map(&:name).join(", "),
+   rating_avg: ratings.find { |rating| rating.votable_id == song.id }.rating_avg
+ }
+end
+```
+
+### Comparemos las soluciones
+
+**Tiempo de ejecución**
+```
+Rehearsal ----------------------------------------------------------------
+Active Record + Ruby code        0.962925   0.058695   1.021620 (  1.021782)
+Only Active Record               1.128978   2.014024   3.143002 (  3.851052)
+Active Record + Ruby code v2     0.319847   0.065642   0.385489 (  0.687544)
+------------------------------------------------------- total: 4.550111sec
+
+                                     user     system      total        real
+Active Record + Ruby code        0.922708   0.093465   1.016173 (  1.016234)
+Only Active Record               1.125311   1.924145   3.049456 (  3.381205)
+Active Record + Ruby code v2     0.319696   0.071452   0.391148 (  0.816727)
+```
+
+**Memoria**
+```
+Calculating -------------------------------------
+  Active Record + Ruby code
+                                   165.907M memsize (     0.000  retained)
+                                     2.200M objects (     0.000  retained)
+                                    50.000  strings (     0.000  retained)
+  Only Active Record               297.493k memsize (     0.000  retained)
+                                     3.393k objects (     0.000  retained)
+                                    50.000  strings (     0.000  retained)
+  Active Record + Ruby code v2
+                                   338.833k memsize (     0.000  retained)
+                                     3.552k objects (     0.000  retained)
+                                    50.000  strings (     0.000  retained)
+
+Comparison:
+  Only Active Record:               297493 allocated
+  Active Record + Ruby code v2:     338833 allocated - 1.14x more
+  Active Record + Ruby code:     165906617 allocated - 557.68x more
+```
+
+**Iteraciones por segundo**
+```
+Warming up --------------------------------------
+  Active Record + Ruby code             1.000  i/100ms
+  Only Active Record                    1.000  i/100ms
+  Active Record + Ruby code v2          1.000  i/100ms
+Calculating -------------------------------------
+  Active Record + Ruby code             0.828  (± 0.0%) i/s -      5.000  in   6.166179s
+  Only Active Record                    0.258  (± 0.0%) i/s -      2.000  in   7.876147s
+  Active Record + Ruby code v2          2.232  (± 0.0%) i/s -     11.000  in   5.098307s
+
+Comparison:
+  Active Record + Ruby code v2:        2.2 i/s
+  Active Record + Ruby code:           0.8 i/s - 2.70x  (± 0.00) slower
+  Only Active Record:                  0.3 i/s - 8.65x  (± 0.00) slower
+```
+
+### Resultados de la comparación
+
+- En tiempo de ejecución la tercera solución es más rápida que las dos primeras. La segunda solución es mucho más lenta que las otras dos.
+- En cuanto a la memoria la tercera solución está utilizando **1.14** veces más de memoria en comparación con la segunda solución y la primera solución usa **557** veces más memoria en comparación con la segunda solución
+- Y sobre la cantidad de iteraciones por segundo, la primera solución es **2.7** veces más rápida que la tercera solución y **8.65** veces más más rápida que la segunda solución.
+
+Sacando conclusiones, la tercera solución es la mejor y la primera solución es la menos óptima. ¿Por qué esta vez la solución que usa puro `Active Record` es la menos óptima? Porque la consulta que estamos haciendo hace un `joins` de dos tablas y esto tiene un costo de optimización como podemos observar.
+
+## Tercer Problema: Reporte de reportes
+
+Generar un reporte que tenga las top “N” canciones con el mayor rating y como párametros se pase aparte del número de canciones si queremos saber los artistas y albums de dichas canciones
+
+**Opciones de solución:**
+- Armar un hash con que contenga todo lo requerido llamando a diferentes métodos de acuerdo a los parámetros.
+- SQL y materialized views
+
+> **SQL Views**
+> Son tablas virtuales creadas a partir de una consulta SELECT que normalmente une múltiples tablas. Cada vez que se llaman se ejecutará la consulta con la que ha sido definida.
+
+> **Materialized views**
+> Son tablas virtuales creadas a partir de una consulta SELECT que normalmente une múltiples tablas como los SQL views. Pero esta almacena el resultado de la consulta haciendolos funcionar como una tabla de solo lectura.
+> Como ventaja tiene que se pueden actualizar cuando lo necesitemos. Esto lo podemos hacer con la gema scenic.
+
