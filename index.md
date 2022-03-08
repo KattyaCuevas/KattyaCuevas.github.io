@@ -31,3 +31,6 @@ I’m obsessed with programming and promoting women's participation in technolog
 I can learn fast, and that helps me to switch technology easily.
 I've worked with Ruby on Rails (Ruby), Django (Python), React (JavaScript and TypeScript), React Native, Electron, and Vue.
 </p>
+
+
+<script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="KattyaCuevas" data-description="Support me on Buy me a coffee!" data-message="" data-color="#40DCA5" data-position="Right" data-x_margin="18" data-y_margin="18"></script>
