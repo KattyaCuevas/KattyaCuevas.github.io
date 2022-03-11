@@ -5,6 +5,8 @@ published: true
 description: "Qué es Autenticación? Cómo podemos hacerlo en Rails? En qué nos ayuda Auth0 para esto?"
 date: 2022-02-25T00:00:00.000Z
 tags: ruby rails auth0 authentication
+header:
+  og_image: /assets/images/articles/autenticacion-con-auth0-en-rails.png
 ---
 
 Uno de los features más importantes que la mayoría de aplicaciones tienen en común es la Autenticación. 
