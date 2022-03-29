@@ -368,15 +368,17 @@ In conclusion, the third solution is the best, and the first solution is the lea
 ## Third Problem: Top "N" songs with the highest rating and pass as parameters if you want their artists and albums
 
 ### Possible Solutions:
-Build the result by calling different methods based on the parameters.
-Using SQL y Materialized views.
+* Build the result by calling different methods based on the parameters.
+* Using SQL y Materialized views.
+
 ### SQL Views
-They are virtual tables created from a `SELECT` query that usually joins multiple tables. 
-Each time they are called, the query they have been defined will be executed.
+* They are virtual tables created from a `SELECT` query that usually joins multiple tables. 
+* Each time they are called, the query they have been defined will be executed.
+
 ### Materialized views
-They are also virtual tables created from a `SELECT` query that normally joins multiple tables.
-They store the query results in this virtual table. They are read-only.
-They can be updated whenever you need them.
+* They are also virtual tables created from a `SELECT` query that normally joins multiple tables.
+* They store the query results in this virtual table. They are read-only.
+* They can be updated whenever you need them.
 
 ## Conclusions
 * The first problem showed us how to use Active Record to make it more powerful using SQL queries
