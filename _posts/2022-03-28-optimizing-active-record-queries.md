@@ -7,13 +7,14 @@ date: 2022-02-27T00:00:00.000Z
 tags: ruby rails active-record benchmark
 ---
 
-**Context**: Some time ago, I worked on a project where I had to make a lot of reports. He had a lot of data, and most of the reports should be in the application's dashboard. The data was divided into more than one table, so I had to make queries joining many tables every time I wanted to generate a new report. That made our application slow and even sometimes broke.
+**Context**: Some time ago, I worked on a project where I had to make a lot of reports. We had a lot of data, and most of the reports should be in the application's dashboard. The data was divided into more than one table, so I had to make queries joining many tables every time I wanted to generate a new report. That made our application slow and even sometimes broke.
 
 In this article, I'll show you how I used Active Record to fix the app's problems and if there's a limit on how to customize Active Record queries.
 
 The sample app I'll use will be a clone (in a base form) of Spotify or any music app. Let me explain how will be the tables relationship in our database.
 
-(BD image)
+![DB Schema](https://user-images.githubusercontent.com/4174791/160634200-149824c6-1500-4322-8e63-043443865d0d.png)
+
 
 All the `songs` belong to an `artist` and an `album`. We also have the `users` table who can vote or rate a song or album. The `ratings` table has a polymorphic relation to `songs` and `albums`.
 
@@ -186,8 +187,12 @@ So why is the second solution the best? Because we are doing only one call on th
 
 ## Second problem: Top 10 songs with their artists that have the highest rating
 ### Possible solutions
+
 This time I have 3 solutions:
+
+
 **First solution**
+
 Using `Active Record` and `Ruby`
 ```rb
 ratings = Rating.where(votable_type: "Song").group(:votable_id).average(:vote)
@@ -203,6 +208,7 @@ ratings.map do |song_id, rating|
 end
 ```
 **Second solution**
+
 Using only one query with a lot of `Active Record` methods
 ```rb
 Song.includes(:artists).joins(:ratings)
@@ -218,6 +224,7 @@ Song.includes(:artists).joins(:ratings)
 ```
 
 **Third solution**
+
 Using 2 queries with `Active Record` methods and `Ruby` code
 ```rb
 ratings = Rating.select("ratings.votable_id, AVG(ratings.vote) as rating_avg")
@@ -357,3 +364,31 @@ The elapsed time of the third solution is faster than the two first solutions. T
 The third solution uses 1.14 times more memory than the second solution, and the first solution uses 557 times more memory than the second solution.
 And on the number of iterations per second, the first solution is 2.7 times faster than the third solution and 8.65 times faster than the second solution.
 In conclusion, the third solution is the best, and the first solution is the least optimal. Why is the solution using pure Active Record the least optimal this time? Because the query we are doing makes joins of two tables, this has an optimization cost, as we can observe.
+
+## Third Problem: Top "N" songs with the highest rating and pass as parameters if you want their artists and albums
+
+### Possible Solutions:
+Build the result by calling different methods based on the parameters.
+Using SQL y Materialized views.
+### SQL Views
+They are virtual tables created from a `SELECT` query that usually joins multiple tables. 
+Each time they are called, the query they have been defined will be executed.
+### Materialized views
+They are also virtual tables created from a `SELECT` query that normally joins multiple tables.
+They store the query results in this virtual table. They are read-only.
+They can be updated whenever you need them.
+
+## Conclusions
+The first problem showed us how to use Active Record to make it more powerful using SQL queries
+The second problem shows us that it is OK to use Ruby to support Active Record.
+The third one shows us that Active Record can also have a limit, and we can use SQL when needed.
+
+
+**Remember**
+* If you will handle a considerable amount of data, try to get only the needed data. You can use the `select` and `pluck` methods from Active Record.
+* Sometimes, the Ruby methods are better than the Active Record ones.
+* Don't be afraid to use SQL with Active Record.
+* Use `size` or `length` instead of `count` if you don't want to make an extra query.
+* Avoid `n + 1` queries with `includes` method.
+
+I hope you enjoyed and learned something from this article. Thanks for reading! ❤️
