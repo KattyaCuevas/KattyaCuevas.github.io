@@ -360,10 +360,10 @@ Comparison:
 ```
 
 **Results of comparison**
-The elapsed time of the third solution is faster than the two first solutions. The second solution is slower than the other two.
-The third solution uses 1.14 times more memory than the second solution, and the first solution uses 557 times more memory than the second solution.
-And on the number of iterations per second, the first solution is 2.7 times faster than the third solution and 8.65 times faster than the second solution.
-In conclusion, the third solution is the best, and the first solution is the least optimal. Why is the solution using pure Active Record the least optimal this time? Because the query we are doing makes joins of two tables, this has an optimization cost, as we can observe.
+* The elapsed time of the third solution is faster than the two first solutions. The second solution is slower than the other two.
+* The third solution uses 1.14 times more memory than the second solution, and the first solution uses 557 times more memory than the second solution.
+* And on the number of iterations per second, the first solution is 2.7 times faster than the third solution and 8.65 times faster than the second solution.
+* In conclusion, the third solution is the best, and the first solution is the least optimal. Why is the solution using pure Active Record the least optimal this time? Because the query we are doing makes joins of two tables, this has an optimization cost, as we can observe.
 
 ## Third Problem: Top "N" songs with the highest rating and pass as parameters if you want their artists and albums
 
