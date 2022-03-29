@@ -22,11 +22,13 @@ All the `songs` belong to an `artist` and an `album`. We also have the `users` t
 
 ## Before Start
 
-¿How will we know if these solutions are fast?
+### ¿How will we know if these solutions are fast?
 There are a lot of ways to analyze your code. In this article, I'll make with these 3 ways:
-Elapsed time
-Memory: space in the disk that the code occupies in execution
-Iterations per second
+* Elapsed time
+* Memory: space in the disk that the code occupies in execution
+* Iterations per second
+
+
 To have these 3 ways to measure our code, we will use the `Benchmark` module inside Ruby and the gems `benchmark-ips` and `benchmark-memory`.
 
 ## First Problem: Get the highest rating albums
@@ -179,9 +181,10 @@ As we see in the results, the first solution is 1.44 times faster than the secon
 
 
 ### Results of comparison
-The second solution is slightly faster than the first solution at elapsed time.
-In terms of memory, the first solution uses 1.54 times more memory than the second solution.
-And on the number of iterations per second, the first solution is 1.44 times faster than the second solution.
+* The second solution is slightly faster than the first solution at elapsed time.
+* In terms of memory, the first solution uses 1.54 times more memory than the second solution.
+* And on the number of iterations per second, the first solution is 1.44 times faster than the second solution.
+
 So why is the second solution the best? Because we are doing only one call on the database, and the whole operation is done from the DB side.
 
 
