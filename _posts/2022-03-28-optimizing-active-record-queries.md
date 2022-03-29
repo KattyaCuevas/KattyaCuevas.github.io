@@ -379,9 +379,9 @@ They store the query results in this virtual table. They are read-only.
 They can be updated whenever you need them.
 
 ## Conclusions
-The first problem showed us how to use Active Record to make it more powerful using SQL queries
-The second problem shows us that it is OK to use Ruby to support Active Record.
-The third one shows us that Active Record can also have a limit, and we can use SQL when needed.
+* The first problem showed us how to use Active Record to make it more powerful using SQL queries
+* The second problem shows us that it is OK to use Ruby to support Active Record.
+* The third one shows us that Active Record can also have a limit, and we can use SQL when needed.
 
 
 **Remember**
