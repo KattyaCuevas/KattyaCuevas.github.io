@@ -98,8 +98,8 @@ analytics:
 # Site Author
 author:
   name             : "Kattya Cuevas"
-  avatar           : "/assets/images/bio-photo.png"
-  bio              : "👩‍👦 Salva's mom<br /> 👩‍💻 Software engineer<br /> 🗣️ Organizer at [**Ruby Peru**](https://rubyperu.dev) and [**Tech Talks**](https://techtalks.pe)<br /> 👩‍🔧 [**WTM Lima**](https://twitter.com/WTMLima) Ambassador"
+  avatar           : "/assets/images/bio-photo.jpg"
+  bio              : "👩‍👦 Salva's mom<br /> 👩‍💻 Software engineer<br /> 🗣️ Organizer at [**Ruby Peru**](https://rubyperu.dev) and [**Tech Talks**](https://techtalks.pe)<br /> 👩‍🔧 **WTM** and **Auth0** Ambassador"
   location         : "Lima, Perú"
   email            : "kattya.cuevas@gmail.com"
   links:

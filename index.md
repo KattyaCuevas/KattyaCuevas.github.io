@@ -9,12 +9,12 @@ permalink: /
     <div style="font-size: 0.75em;display: flex;flex-direction: column;">
       <span>👩‍💻 Software engineer</span>
       <span>🗣️ Organizer at <a href="http://rubyperu.dev"><strong>Ruby Peru</strong></a> and <a href="https://techtalks.pe"><strong>Tech Talks</strong></a></span>
-      <span>👩‍🔧 <a href="https://twitter.com/WTMLima"><strong>WTM Lima</strong></a> Ambassador</span>
+      <span>👩‍🔧 <strong>WTM</strong> and <b>Auth0</b> Ambassador</span>
     </div>
   </div>
 
   <figure style="max-width: 250px">
-    <img src="/assets/images/bio-photo.png" alt="Kattya Cuevas">
+    <img src="/assets/images/bio-photo.jpg" alt="Kattya Cuevas">
   </figure> 
 </div>
 
