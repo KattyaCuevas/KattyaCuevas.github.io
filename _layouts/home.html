@@ -1,27 +1,25 @@
 ---
 layout: archive
 ---
-<div class="mx-auto max-w-2xl lg:max-w-5xl flex flex-col gap-12">
 
-  {{ content }}
+{{ content }}
 
-  <hr />
-  <div class="grid grid-cols-3">
-    <article class="col-span-2 flex flex-col gap-8">
-      <h2 class="font-semibold text-2xl text-zinc-600 mb-2">{{ site.data.ui-text[site.locale].recent_posts | default: "Recent Posts" }}</h2>
+<hr />
+<div class="grid grid-cols-3">
+  <article class="col-span-2 flex flex-col gap-8">
+    <h2 class="font-semibold text-2xl text-zinc-600 mb-2">{{ site.data.ui-text[site.locale].recent_posts | default: "Recent Posts" }}</h2>
 
-      {% if paginator %}
-        {% assign posts = paginator.posts %}
-      {% else %}
-        {% assign posts = site.posts %}
-      {% endif %}
+    {% if paginator %}
+      {% assign posts = paginator.posts %}
+    {% else %}
+      {% assign posts = site.posts %}
+    {% endif %}
 
-      {% assign entries_layout = page.entries_layout | default: 'list' %}
+    {% assign entries_layout = page.entries_layout | default: 'list' %}
 
-      {% for post in posts %}
-        {% include archive-single.html type=entries_layout %}
-      {% endfor %}
-      <!-- include paginator.html -->
-    </article>
-  </div>
+    {% for post in posts %}
+      {% include archive-single.html type=entries_layout %}
+    {% endfor %}
+    <!-- include paginator.html -->
+  </article>
 </div>
