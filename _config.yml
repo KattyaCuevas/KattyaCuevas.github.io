@@ -10,9 +10,9 @@
 # Review documentation to determine if you should use `theme` or `remote_theme`
 # https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/#installing-the-theme
 
-theme                  : "minimal-mistakes-jekyll"
+# theme                  : "minimal-mistakes-jekyll"
 # remote_theme           : "mmistakes/minimal-mistakes"
-minimal_mistakes_skin    : "mint" # "default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
+# minimal_mistakes_skin    : "mint" # "default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
 locale                   : "en-US"
@@ -25,7 +25,8 @@ url                      : "https://kattya.dev" # the base hostname & protocol f
 baseurl                  : "" # the subpath of your site, e.g. "/blog"
 repository               : # GitHub username/repo-name e.g. "mmistakes/minimal-mistakes"
 teaser                   : # path of fallback teaser image, e.g. "/assets/images/500x300.png"
-logo                     : # "/assets/images/logo.png" # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
+logo                     : "/assets/images/logo.png" # "/assets/images/logo.png" # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
+dark_logo                : "/assets/images/dark-logo.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 # breadcrumbs            : false # true, false (default)
 words_per_minute         : 200
@@ -73,7 +74,7 @@ twitter:
   username               : "KattyaCuevas"
 facebook:
   username               : "KattyaCuevas"
-  app_id                 : 
+  app_id                 :
   publisher              :
 og_image                 : # Open Graph/Twitter default site image
 # For specifying social profiles
@@ -220,6 +221,7 @@ plugins:
   - jekyll-gist
   - jekyll-feed
   - jekyll-include-cache
+  - jekyll-postcss
 
 # mimic GitHub Pages with --safe
 whitelist:

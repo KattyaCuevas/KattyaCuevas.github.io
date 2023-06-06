@@ -3,34 +3,31 @@ layout: home
 permalink: /
 ---
 
-<div style="display: flex; align-items: center; justify-content: space-between;">
+<header class="flex items-center justify-between gap-12 pt-10">
   <div>
-    <h1>Kattya Cuevas</h1>
-    <div style="font-size: 0.75em;display: flex;flex-direction: column;">
-      <span>👩‍💻 Software engineer</span>
-      <span>🗣️ Organizer at <a href="http://rubyperu.dev"><strong>Ruby Peru</strong></a> and <a href="https://techtalks.pe"><strong>Tech Talks</strong></a></span>
-      <span>👩‍🔧 <strong>WTM</strong> and <b>Auth0</b> Ambassador</span>
+    <h1 class="text-6xl font-bold text-zinc-950 dark:text-zinc-100 sm:text-5xl">Hi, I'm Kattya Cuevas!</h1>
+    <p class="max-w-prose mt-6 text-lg dark:text-zinc-400 font-light">
+      Software engineer with 10 years of experience, <a href="https://ruby.pe" class="font-bold text-zinc-700 px-1 rounded hover:bg-zinc-700 hover:text-zinc-100 dark:text-zinc-300 dark:hover:text-zinc-50 dark:hover:underline" target="_blank">Ruby Peru</a> organizer, and <a href="https://developers.google.com/womentechmakers" class="font-bold text-zinc-700 px-1 rounded hover:bg-zinc-700 hover:text-zinc-100 dark:text-zinc-300 dark:hover:text-zinc-50 dark:hover:underline" target="_blank">Women Techmakers</a> Ambassador
+    </p>
+    <div class="flex gap-4 mt-4">
+      <a aria-label="Follow on Twitter" href="https://twitter.com/KattyaCuevas" target="_blank">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="h-8 w-8 p-1 fill-zinc-500 transition rounded hover:bg-zinc-500 hover:fill-white dark:fill-zinc-400 dark:hover:fill-zinc-100"><path d="M20.055 7.983c.011.174.011.347.011.523 0 5.338-3.92 11.494-11.09 11.494v-.003A10.755 10.755 0 0 1 3 18.186c.308.038.618.057.928.058a7.655 7.655 0 0 0 4.841-1.733c-1.668-.032-3.13-1.16-3.642-2.805a3.753 3.753 0 0 0 1.76-.07C5.07 13.256 3.76 11.6 3.76 9.676v-.05a3.77 3.77 0 0 0 1.77.505C3.816 8.945 3.288 6.583 4.322 4.737c1.98 2.524 4.9 4.058 8.034 4.22a4.137 4.137 0 0 1 1.128-3.86A3.807 3.807 0 0 1 19 5.274a7.657 7.657 0 0 0 2.475-.98c-.29.934-.9 1.729-1.713 2.233A7.54 7.54 0 0 0 22 5.89a8.084 8.084 0 0 1-1.945 2.093Z"></path></svg>
+      </a>
+      <a aria-label="Follow on GitHub" href="https://github.com/KattyaCuevas" target="_blank">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="h-8 w-8 p-1 fill-zinc-500 transition rounded hover:bg-zinc-500 hover:fill-white dark:fill-zinc-400 dark:hover:fill-zinc-300"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.475 2 2 6.588 2 12.253c0 4.537 2.862 8.369 6.838 9.727.5.09.687-.218.687-.487 0-.243-.013-1.05-.013-1.91C7 20.059 6.35 18.957 6.15 18.38c-.113-.295-.6-1.205-1.025-1.448-.35-.192-.85-.667-.013-.68.788-.012 1.35.744 1.538 1.051.9 1.551 2.338 1.116 2.912.846.088-.666.35-1.115.638-1.371-2.225-.256-4.55-1.14-4.55-5.062 0-1.115.387-2.038 1.025-2.756-.1-.256-.45-1.307.1-2.717 0 0 .837-.269 2.75 1.051.8-.23 1.65-.346 2.5-.346.85 0 1.7.115 2.5.346 1.912-1.333 2.75-1.05 2.75-1.05.55 1.409.2 2.46.1 2.716.637.718 1.025 1.628 1.025 2.756 0 3.934-2.337 4.806-4.562 5.062.362.32.675.936.675 1.897 0 1.371-.013 2.473-.013 2.82 0 .268.188.589.688.486a10.039 10.039 0 0 0 4.932-3.74A10.447 10.447 0 0 0 22 12.253C22 6.588 17.525 2 12 2Z"></path></svg>
+      </a>
+      <a aria-label="Follow on Instagram" href="https://instagram.com/KattyaCuevas" target="_blank">
+        <svg viewBox="0 0 24 24" aria-hidden="true" class="h-8 w-8 p-1 fill-zinc-500 transition rounded hover:bg-zinc-500 hover:fill-white dark:fill-zinc-400 dark:hover:fill-zinc-100"><path d="M12 3c-2.444 0-2.75.01-3.71.054-.959.044-1.613.196-2.185.418A4.412 4.412 0 0 0 4.51 4.511c-.5.5-.809 1.002-1.039 1.594-.222.572-.374 1.226-.418 2.184C3.01 9.25 3 9.556 3 12s.01 2.75.054 3.71c.044.959.196 1.613.418 2.185.23.592.538 1.094 1.039 1.595.5.5 1.002.808 1.594 1.038.572.222 1.226.374 2.184.418C9.25 20.99 9.556 21 12 21s2.75-.01 3.71-.054c.959-.044 1.613-.196 2.185-.419a4.412 4.412 0 0 0 1.595-1.038c.5-.5.808-1.002 1.038-1.594.222-.572.374-1.226.418-2.184.044-.96.054-1.267.054-3.711s-.01-2.75-.054-3.71c-.044-.959-.196-1.613-.419-2.185A4.412 4.412 0 0 0 19.49 4.51c-.5-.5-1.002-.809-1.594-1.039-.572-.222-1.226-.374-2.184-.418C14.75 3.01 14.444 3 12 3Zm0 1.622c2.403 0 2.688.009 3.637.052.877.04 1.354.187 1.67.31.421.163.72.358 1.036.673.315.315.51.615.673 1.035.123.317.27.794.31 1.671.043.95.052 1.234.052 3.637s-.009 2.688-.052 3.637c-.04.877-.187 1.354-.31 1.67-.163.421-.358.72-.673 1.036a2.79 2.79 0 0 1-1.035.673c-.317.123-.794.27-1.671.31-.95.043-1.234.052-3.637.052s-2.688-.009-3.637-.052c-.877-.04-1.354-.187-1.67-.31a2.789 2.789 0 0 1-1.036-.673 2.79 2.79 0 0 1-.673-1.035c-.123-.317-.27-.794-.31-1.671-.043-.95-.052-1.234-.052-3.637s.009-2.688.052-3.637c.04-.877.187-1.354.31-1.67.163-.421.358-.72.673-1.036.315-.315.615-.51 1.035-.673.317-.123.794-.27 1.671-.31.95-.043 1.234-.052 3.637-.052Z"></path><path d="M12 15a3 3 0 1 1 0-6 3 3 0 0 1 0 6Zm0-7.622a4.622 4.622 0 1 0 0 9.244 4.622 4.622 0 0 0 0-9.244Zm5.884-.182a1.08 1.08 0 1 1-2.16 0 1.08 1.08 0 0 1 2.16 0Z"></path></svg>
+      </a>
+      <a aria-label="Follow on LinkedIn" href="https://www.linkedin.com/in/kattyacuevas/"><svg viewBox="0 0 24 24" aria-hidden="true" class="h-8 w-8 p-1 fill-zinc-500 transition rounded hover:bg-zinc-500 hover:fill-white dark:fill-zinc-400 dark:hover:fill-zinc-300"><path d="M18.335 18.339H15.67v-4.177c0-.996-.02-2.278-1.39-2.278-1.389 0-1.601 1.084-1.601 2.205v4.25h-2.666V9.75h2.56v1.17h.035c.358-.674 1.228-1.387 2.528-1.387 2.7 0 3.2 1.778 3.2 4.091v4.715zM7.003 8.575a1.546 1.546 0 01-1.548-1.549 1.548 1.548 0 111.547 1.549zm1.336 9.764H5.666V9.75H8.34v8.589zM19.67 3H4.329C3.593 3 3 3.58 3 4.297v15.406C3 20.42 3.594 21 4.328 21h15.338C20.4 21 21 20.42 21 19.703V4.297C21 3.58 20.4 3 19.666 3h.003z"></path></svg></a>
+      <a aria-label="Follow on dev.to" href="https://dev.to/kattyacuevas">
+        <svg viewBox="0 0 448 512" aria-hidden="true" class="h-8 w-9 p-1 fill-zinc-500 transition rounded hover:bg-zinc-500 hover:fill-white dark:fill-zinc-400 dark:hover:fill-zinc-300"><path d="M120.12 208.29c-3.88-2.9-7.77-4.35-11.65-4.35H91.03v104.47h17.45c3.88 0 7.77-1.45 11.65-4.35 3.88-2.9 5.82-7.25 5.82-13.06v-69.65c-.01-5.8-1.96-10.16-5.83-13.06zM404.1 32H43.9C19.7 32 .06 51.59 0 75.8v360.4C.06 460.41 19.7 480 43.9 480h360.2c24.21 0 43.84-19.59 43.9-43.8V75.8c-.06-24.21-19.7-43.8-43.9-43.8zM154.2 291.19c0 18.81-11.61 47.31-48.36 47.25h-46.4V172.98h47.38c35.44 0 47.36 28.46 47.37 47.28l.01 70.93zm100.68-88.66H201.6v38.42h32.57v29.57H201.6v38.41h53.29v29.57h-62.18c-11.16.29-20.44-8.53-20.72-19.69V193.7c-.27-11.15 8.56-20.41 19.71-20.69h63.19l-.01 29.52zm103.64 115.29c-13.2 30.75-36.85 24.63-47.44 0l-38.53-144.8h32.57l29.71 113.72 29.57-113.72h32.58l-38.46 144.8z"/></svg>
+      </a>
     </div>
   </div>
 
-  <figure style="max-width: 250px">
-    <img src="/assets/images/bio-photo.jpg" alt="Kattya Cuevas">
-  </figure> 
-</div>
 
-<p style="font-size: 0.75em;">
-I’m Software Engineer, and I’ve been a developer for more than eight years.
-I’ve built apps about education, mental wellness, legal assistance, and video streaming, and I worked as Tech lead, teacher, CTO, mentor, speaker, leader, facilitator, Full Stack, and Backend developer.
-I’m also an organizer at Ruby Peru and Tech Talks communities and a WTM Lima ambassador.
-</p>
-<p style="font-size: 0.75em;">
-In my spare time, I use to play with my child and talk about technology.
-I’m obsessed with programming and promoting women's participation in technology.
-</p>
-<p style="font-size: 0.75em;">
-I can learn fast, and that helps me to switch technology easily.
-I've worked with Ruby on Rails (Ruby), Django (Python), React (JavaScript and TypeScript), React Native, Electron, and Vue.
-</p>
-
+  <img src="/assets/images/bio-photo.jpg" alt="Kattya Cuevas's photo" class="w-60 rounded-full">
+</header>
 
 <script data-name="BMC-Widget" data-cfasync="false" src="https://cdnjs.buymeacoffee.com/1.0.0/widget.prod.min.js" data-id="KattyaCuevas" data-description="Support me on Buy me a coffee!" data-message="" data-color="#40DCA5" data-position="Right" data-x_margin="18" data-y_margin="18"></script>

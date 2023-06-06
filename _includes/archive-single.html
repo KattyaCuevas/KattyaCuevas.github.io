@@ -1,0 +1,40 @@
+{% if post.header.teaser %}
+{% capture teaser %}{{ post.header.teaser }}{% endcapture %}
+{% else %}
+{% assign teaser = site.teaser %}
+{% endif %}
+
+{% if post.id %}
+{% assign title = post.title | markdownify | remove: "<p>" | remove: "</p>" %}
+{% else %}
+{% assign title = post.title %}
+{% endif %}
+
+{% if post.link %}
+  {% assign link = post.link %}
+{% else %}
+  {% assign link = post.url | relative_url %}
+{% endif %}
+
+<article class="group relative flex flex-col items-start" itemscope itemtype="https://schema.org/CreativeWork">
+  {% if include.type == "grid" and teaser %}
+    <div class="archive__item-teaser">
+      <img src="{{ teaser | relative_url }}" alt="">
+    </div>
+  {% endif %}
+  <h3 class="text-base font-semibold tracking-tight text-zinc-800 dark:text-zinc-100" itemprop="headline">
+    <div
+      class="absolute -inset-x-4 -inset-y-4 z-0 scale-95 bg-zinc-200 opacity-0 transition group-hover:scale-100 group-hover:opacity-100 dark:bg-zinc-800/50 sm:-inset-x-6 sm:rounded-2xl">
+    </div>
+    <a href="{{ link }}">
+      <span class="absolute -inset-x-4 -inset-y-6 z-20 sm:-inset-x-6 sm:rounded-2xl"></span>
+      <span class="relative z-10">{{ title }}</span>
+    </a>
+  </h3>
+  <!--  include page__meta.html type=include.type -->
+  {% if post.excerpt %}
+    <p class="relative z-10 mt-2 text-sm text-zinc-600 dark:text-zinc-400" itemprop="description">
+      {{ post.excerpt | markdownify | strip_html | truncate: 160 }}
+    </p>
+  {% endif %}
+</article>

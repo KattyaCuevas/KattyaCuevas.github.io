@@ -15,7 +15,50 @@ In this article, I'll show you how I used Active Record to fix the app's problem
 
 The sample app I'll use will be a clone (in a base form) of Spotify or any music app. Let me explain how will be the tables relationship in our database.
 
-![DB Schema](https://user-images.githubusercontent.com/4174791/160634200-149824c6-1500-4322-8e63-043443865d0d.png)
+<pre class="mermaid">
+---
+title: DB Schema
+---
+erDiagram
+    songs ||--|{ ratings : ""
+    songs {
+        integer id
+        string title
+        integer duration
+        integer progress
+    }
+    albums ||--|{ ratings : ""
+    albums {
+        integer id
+        string title
+    }
+    artists ||--|{ ratings : ""
+    artists {
+        integer id
+        string name
+        string age
+    }
+    users ||--|{ ratings : ""
+    users {
+        integer id
+        string name
+    }
+    songs ||--|{ associations : ""
+    albums ||--|{ associations : ""
+    artists ||--|{ associations : ""
+    associations {
+        integer song_id
+        integer artist_id
+        integer album_id
+    }
+    ratings {
+        integer id
+        string votable_type
+        integer votable_id
+        integer user_id
+        integer vote
+    }
+</pre>
 
 
 All the `songs` belong to an `artist` and an `album`. We also have the `users` table who can vote or rate a song or album. The `ratings` table has a polymorphic relation to `songs` and `albums`.
@@ -44,9 +87,11 @@ Album.includes(:ratings).map { |album| album.ratings.length }.max
 **Second solution:**
 Using only `Active Record` methods
 ```rb
-Album.from(Album.select(
-  "albums.*", "COUNT(ratings.id) AS rating_count"
-).joins(:ratings).group("albums.id")).maximum("rating_count")
+Album.from(
+  Album.select(
+    "albums.*", "COUNT(ratings.id) AS rating_count"
+  ).joins(:ratings).group("albums.id")
+).maximum("rating_count")
 ```
 
 Both return the same result: 20. What is the difference?
@@ -60,7 +105,7 @@ This expression executes the following SQL code:
 ```sql
 SELECT "albums".* FROM "albums"
 
-SELECT "ratings".* FROM "ratings" WHERE "ratings"."ratingable_type" = "Album" 
+SELECT "ratings".* FROM "ratings" WHERE "ratings"."ratingable_type" = "Album"
 AND "ratings"."ratingable_id" IN (1, 2, 3, 4, 5, 6, 7, 8, 9, 10, ...)
 ```
 > _The more albums we have in our database, the longer the ranking list we have._
@@ -90,7 +135,7 @@ GROUP BY "albums"."id"
 
 Here we add the `COUNT(rating.id)` column with the alias `rating_count` to our query to count how many associated ratings have every album.
 
-The second part is: 
+The second part is:
 ```rb
 Album.from(...).maximum("rating_count")
 ```
@@ -115,7 +160,7 @@ end
 > Note: I'm using the `bmbm` method to execute the reports twice, so none of the methods will be affected, only for being the first.
 
 This is the result:
-```
+```dot
 Rehearsal -------------------------------------------------------------
 Active Record + Ruby code   5.554467   0.788396   6.342863 (  7.404660)
 Only Active Record          0.003204   0.001894   0.005098 (  0.741973)
@@ -139,7 +184,7 @@ end
 ```
 
 This is the result:
-```
+```dot
 Calculating -------------------------------------
 Active Record + Ruby code
                        585.804M memsize (     0.000  retained)
@@ -167,7 +212,7 @@ end
 ```
 
 This is the result:
-```
+```dot
 Warming up --------------------------------------
 Active Record + Ruby code
                          1.000  i/100ms
@@ -342,7 +387,7 @@ Song
 ### Let's compare the solutions
 
 **Elapsed Time**
-```
+```dot
 Rehearsal ----------------------------------------------------------------
 Active Record + Ruby code      0.787713   0.196014   0.983727 (  1.645864)
 Only Active Record             0.016700   0.002986   0.019686 (  0.567646)
@@ -356,7 +401,7 @@ Active Record + Ruby code v2   0.002977   0.000137   0.003114 (  0.378619)
 ```
 
 **Memory**
-```
+```dot
 Calculating -------------------------------------
 Active Record + Ruby code
                        175.136M memsize (     0.000  retained)
@@ -377,7 +422,7 @@ Active Record + Ruby code:  175135967 allocated - 577.56x more
 ```
 
 **Iterations per second**
-```
+```dot
 Warming up --------------------------------------
 Active Record + Ruby code
                          1.000  i/100ms
@@ -411,7 +456,7 @@ In conclusion, the third solution is the best, and the first solution is the lea
 * Using SQL y Materialized views.
 
 ### SQL Views
-* They are virtual tables created from a `SELECT` query that usually joins multiple tables. 
+* They are virtual tables created from a `SELECT` query that usually joins multiple tables.
 * Each time they are called, the query they have been defined will be executed.
 
 ### Materialized views
@@ -423,7 +468,7 @@ In conclusion, the third solution is the best, and the first solution is the lea
 I'm using the best solution from the previous problem to compare with the SQL and Materialized views.
 
 **Elapsed Time**
-```
+```dot
 Rehearsal -------------------------------------------------------------
 Active Record + Ruby code   0.096419   0.036263   0.132682 (  0.598458)
 SQL View                    0.000640   0.000259   0.000899 (  0.001701)
@@ -437,7 +482,7 @@ Materialized View           0.000100   0.000000   0.000100 (  0.000098)
 ```
 
 **Memory**
-```
+```dot
 Calculating -------------------------------------
 Active Record + Ruby code
                        347.036k memsize (     0.000  retained)
@@ -457,7 +502,7 @@ Active Record + Ruby code:     347036 allocated - 174.21x more
 ```
 
 **Iterations per second**
-```
+```dot
 Warming up --------------------------------------
 Active Record + Ruby code
                          1.000  i/100ms
