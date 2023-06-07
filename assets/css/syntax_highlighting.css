@@ -326,3 +326,9 @@
   background-color: #e5e7eb;
   border-radius: 6px;
 }
+
+@media (prefers-color-scheme: dark) {
+  .language-plaintext.highlighter-rouge {
+    background-color: #52525b;
+  }
+}

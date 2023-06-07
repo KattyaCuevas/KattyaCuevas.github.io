@@ -7,7 +7,7 @@ permalink: /
   <div>
     <h1 class="text-6xl font-bold text-zinc-950 dark:text-zinc-100 sm:text-5xl">Hi, I'm Kattya Cuevas!</h1>
     <p class="max-w-prose mt-6 text-lg dark:text-zinc-400 font-light">
-      Software engineer with 10 years of experience, <a href="https://ruby.pe" class="font-bold text-zinc-700 px-1 rounded hover:bg-zinc-700 hover:text-zinc-100 dark:text-zinc-300 dark:hover:text-zinc-50 dark:hover:underline" target="_blank">Ruby Peru</a> organizer, and <a href="https://developers.google.com/womentechmakers" class="font-bold text-zinc-700 px-1 rounded hover:bg-zinc-700 hover:text-zinc-100 dark:text-zinc-300 dark:hover:text-zinc-50 dark:hover:underline" target="_blank">Women Techmakers</a> Ambassador
+      Software engineer with 10 years of experience, <a href="https://ruby.pe" class="font-bold text-zinc-700   rounded hover:bg-zinc-700 hover:text-zinc-100 dark:text-zinc-300 dark:hover:text-zinc-50 dark:hover:underline" target="_blank">Ruby Peru</a> organizer, and <a href="https://developers.google.com/womentechmakers" class="font-bold text-zinc-700   rounded hover:bg-zinc-700 hover:text-zinc-100 dark:text-zinc-300 dark:hover:text-zinc-50 dark:hover:underline" target="_blank">Women Techmakers</a> Ambassador
     </p>
     <div class="flex gap-4 mt-4">
       <a aria-label="Follow on Twitter" href="https://twitter.com/KattyaCuevas" target="_blank">
