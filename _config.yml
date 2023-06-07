@@ -28,7 +28,33 @@ teaser                   : # path of fallback teaser image, e.g. "/assets/images
 logo                     : "/assets/images/logo.png" # "/assets/images/logo.png" # path of logo image to display in the masthead, e.g. "/assets/images/88x88.png"
 dark_logo                : "/assets/images/dark-logo.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
-# breadcrumbs            : false # true, false (default)
+breadcrumbs              : false # true, false (default)
+work_experience          :
+  - company              : Shopify
+    role                 : Software Developer
+    start_date           : 05/2022
+    end_date             : 05/2023
+  - company              : CloudForecast
+    role                 : Software Engineer
+    start_date           : 07/2021
+    end_date             : 05/2022
+  - company              : Able
+    role                 : Backend Instructor
+    start_date           : 06/2018
+    end_date             : 05/2021
+  - company              : Able
+    role                 : Software Engineer
+    start_date           : 01/2019
+    end_date             : 07/2019
+  - company              : Platzi
+    role                 : Backend Developer
+    start_date           : 01/2017
+    end_date             : 03/2018
+  - company              : devAcademy
+    role                 : Software Developer & Project Manager
+    start_date           : 10/2013
+    end_date             : 12/2016
+
 words_per_minute         : 200
 comments:
   provider               : # false (default), "disqus", "discourse", "facebook", "staticman", "staticman_v2", "utterances", "custom"
