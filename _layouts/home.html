@@ -5,8 +5,8 @@ layout: archive
 {{ content }}
 
 <hr />
-<div class="grid grid-cols-3 items-start gap-8">
-  <article class="col-span-2 flex flex-col gap-8 pr-8">
+<div class="grid lg:grid-cols-3 items-start gap-8">
+  <article class="lg:col-span-2 flex flex-col gap-8 lg:pr-8">
     <h2 class="font-semibold text-2xl text-zinc-600 dark:text-zinc-200 mb-2">{{
       site.data.ui-text[site.locale].recent_posts | default: "Recent Posts" }}</h2>
 
@@ -24,7 +24,9 @@ layout: archive
     <!-- include paginator.html -->
   </article>
 
-  <div class="rounded-2xl border border-zinc-200 p-6 dark:border-zinc-700/40">
+  <hr class="lg:hidden" />
+
+  <div class="rounded-2xl lg:border lg:border-zinc-200 lg:p-6 dark:lg:border-zinc-700/40">
     <h3 class="font-semibold text-xl text-zinc-600 dark:text-zinc-200 mb-2">{{ site.data.ui-text[site.locale].work |
       default: "Work" }}</h3>
     <ol class="mt-6 space-y-4">
