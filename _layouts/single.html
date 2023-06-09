@@ -1,0 +1,162 @@
+---
+layout: default
+---
+
+{% if page.header.overlay_color or page.header.overlay_image or page.header.image %}
+  {% include page__hero.html %}
+{% elsif page.header.video.id and page.header.video.provider %}
+  {% include page__hero_video.html %}
+{% endif %}
+
+{% assign breadcrumbs_enabled = site.breadcrumbs %}
+{% if page.breadcrumbs != null %}
+  {% assign breadcrumbs_enabled = page.breadcrumbs %}
+{% endif %}
+{% if page.url != "/" and breadcrumbs_enabled %}
+  {% unless paginator %}
+    {% include breadcrumbs.html %}
+  {% endunless %}
+{% endif %}
+
+<div id="main" role="main" class="mx-auto max-w-2xl lg:max-w-5xl flex flex-col gap-12">
+
+  <article itemscope itemtype="https://schema.org/CreativeWork">
+    {% if page.title %}<meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
+    {% if page.excerpt %}<meta itemprop="description" content="{{ page.excerpt | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
+    {% if page.date %}<meta itemprop="datePublished" content="{{ page.date | date_to_xmlschema }}">{% endif %}
+    {% if page.last_modified_at %}<meta itemprop="dateModified" content="{{ page.last_modified_at | date_to_xmlschema }}">{% endif %}
+
+    <div class="mx-auto prose prose-zinc dark:prose-invert lg:prose-lg">
+      {% unless page.header.overlay_color or page.header.overlay_image %}
+      <header>
+        {% if page.title %}<h1 itemprop="headline">
+          <a href="{{ page.url | absolute_url }}" class="u-url" itemprop="url">{{ page.title | markdownify | remove: "
+            <p>" | remove: "</p>" }}</a>
+        </h1>{% endif %}
+      </header>
+      {% endunless %}
+
+      <section itemprop="text">
+        {{ content }}
+        {% if page.link %}<div><a href="{{ page.link }}" class="btn btn--primary">{{
+            site.data.ui-text[site.locale].ext_link_label | default: "Direct Link" }}</a></div>{% endif %}
+      </section>
+
+      <hr/>
+
+      <footer>
+        {% if site.data.ui-text[site.locale].meta_label %}
+          <h4 class="mt-6 mb-4 text-3xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-lg">{{ site.data.ui-text[site.locale].meta_label }}</h4>
+        {% endif %}
+
+        {% if site.tag_archive.type and page.tags[0] %}
+          {% case site.tag_archive.type %}
+          {% when "liquid" %}
+            {% assign path_type = "#" %}
+          {% when "jekyll-archives" %}
+            {% assign path_type = nil %}
+          {% endcase %}
+
+          {% if site.tag_archive.path %}
+            {% assign tags_sorted = page.tags | sort_natural %}
+
+            <p class="page__taxonomy">
+              <span class="font-semibold">🏷️ {{ site.data.ui-text[site.locale].tags_label | default: "Tags:" }} </span>
+              <span itemprop="keywords">
+              {% for tag_word in tags_sorted %}
+                <a href="{{ tag_word | slugify | prepend: path_type | prepend: site.tag_archive.path | relative_url }}" class="font-bold text-zinc-700 px-1 rounded hover:bg-zinc-700 hover:text-zinc-100 dark:text-zinc-300 dark:hover:text-zinc-50 dark:hover:underline" rel="tag">{{ tag_word }}</a>{% unless forloop.last %}<span class="sep">, </span>{% endunless %}
+              {% endfor %}
+              </span>
+            </p>
+          {% endif %}
+        {% endif %}
+
+        {% assign date_format = site.date_format | default: "%B %-d, %Y" %}
+        {% if page.last_modified_at %}
+          <p><span class="font-semibold">🗓️ {{ site.data.ui-text[site.locale].date_label | default: "Updated:" }}</span> <time datetime="{{ page.last_modified_at | date: "%Y-%m-%d" }}">{{ page.last_modified_at | date: date_format }}</time></p>
+        {% elsif page.date %}
+          <p><span class="font-semibold">🗓️ {{ site.data.ui-text[site.locale].date_label | default: "Updated:" }}</span> <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: date_format }}</time></p>
+        {% endif %}
+      </footer>
+
+      <hr/>
+
+      {% if page.share %}
+        <section class="page__share">
+          {% if site.data.ui-text[site.locale].share_on_label %}
+            <h4 class="mt-6 mb-4 text-3xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-lg">{{ site.data.ui-text[site.locale].share_on_label | default: "Share on" }}</h4>
+          {% endif %}
+
+          <div class="flex gap-4">
+            <a class="px-2 py-1 rounded group flex gap-1 text-zinc-500 dark:text-zinc-300 hover:bg-zinc-500 hover:text-white transition" href="https://twitter.com/intent/tweet?{% if site.twitter.username %}via={{ site.twitter.username | url_encode }}&{% endif %}text={{ page.title | url_encode }}%20{{ page.url | absolute_url | url_encode }}" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="{{ site.data.ui-text[site.locale].share_on_label | default: 'Share on' }} Twitter">
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="h-8 w-8 p-1 fill-zinc-500 transition group-hover:fill-white dark:fill-zinc-300 dark:group-hover:fill-zinc-100"><path d="M20.055 7.983c.011.174.011.347.011.523 0 5.338-3.92 11.494-11.09 11.494v-.003A10.755 10.755 0 0 1 3 18.186c.308.038.618.057.928.058a7.655 7.655 0 0 0 4.841-1.733c-1.668-.032-3.13-1.16-3.642-2.805a3.753 3.753 0 0 0 1.76-.07C5.07 13.256 3.76 11.6 3.76 9.676v-.05a3.77 3.77 0 0 0 1.77.505C3.816 8.945 3.288 6.583 4.322 4.737c1.98 2.524 4.9 4.058 8.034 4.22a4.137 4.137 0 0 1 1.128-3.86A3.807 3.807 0 0 1 19 5.274a7.657 7.657 0 0 0 2.475-.98c-.29.934-.9 1.729-1.713 2.233A7.54 7.54 0 0 0 22 5.89a8.084 8.084 0 0 1-1.945 2.093Z"></path></svg>
+              Twitter
+            </a>
+
+            <a class="px-2 py-1 rounded group flex gap-1 text-zinc-500 dark:text-zinc-300 hover:bg-zinc-500 hover:text-white transition" href="https://www.linkedin.com/shareArticle?mini=true&url={{ page.url | absolute_url | url_encode }}" onclick="window.open(this.href, 'window', 'left=20,top=20,width=500,height=500,toolbar=1,resizable=0'); return false;" title="{{ site.data.ui-text[site.locale].share_on_label | default: 'Share on' }} LinkedIn">
+              <svg viewBox="0 0 24 24" aria-hidden="true" class="h-8 w-8 p-1 fill-zinc-500 transition group-hover:fill-white dark:fill-zinc-300 dark:group-hover:fill-zinc-300"><path d="M18.335 18.339H15.67v-4.177c0-.996-.02-2.278-1.39-2.278-1.389 0-1.601 1.084-1.601 2.205v4.25h-2.666V9.75h2.56v1.17h.035c.358-.674 1.228-1.387 2.528-1.387 2.7 0 3.2 1.778 3.2 4.091v4.715zM7.003 8.575a1.546 1.546 0 01-1.548-1.549 1.548 1.548 0 111.547 1.549zm1.336 9.764H5.666V9.75H8.34v8.589zM19.67 3H4.329C3.593 3 3 3.58 3 4.297v15.406C3 20.42 3.594 21 4.328 21h15.338C20.4 21 21 20.42 21 19.703V4.297C21 3.58 20.4 3 19.666 3h.003z"></path></svg>
+              LinkedIn
+            </a>
+          </div>
+        </section>
+      {% endif %}
+
+      <hr />
+      <!-- include post_pagination.html -->
+
+      {% if page.previous or page.next %}
+        <nav class="flex justify-between">
+          {% if page.previous %}
+            <a
+              href="{{ page.previous.url | relative_url }}"
+              class="px-2 py-1 rounded group flex gap-1 text-zinc-500 hover:bg-zinc-500 hover:text-white dark:text-zinc-300 transition"
+              title="{{ page.previous.title | markdownify | strip_html }}">
+              < {{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}
+            </a>
+          {% else %}
+            <span class="px-2 py-1 rounded group flex gap-1 underline text-zinc-300 dark:text-zinc-500 cursor-not-allowed">< {{ site.data.ui-text[site.locale].pagination_previous | default: "Previous" }}</span>
+          {% endif %}
+          {% if page.next %}
+            <a
+              href="{{ page.next.url | relative_url }}"
+              class="px-2 py-1 rounded group flex gap-1 text-zinc-500 hover:bg-zinc-500 hover:text-white dark:text-zinc-300 transition"
+              title="{{ page.next.title | markdownify | strip_html }}">
+              {{ site.data.ui-text[site.locale].pagination_next | default: "Next" }} >
+            </a>
+          {% else %}
+            <span class="px-2 py-1 rounded group flex gap-1 underline text-zinc-300 dark:text-zinc-500 cursor-not-allowed">{{ site.data.ui-text[site.locale].pagination_next | default: "Next" }} ></span>
+          {% endif %}
+        </nav>
+      {% endif %}
+    </div>
+  </article>
+
+  <hr />
+
+  {% comment %}<!-- only show related on a post page when `related: true` -->{% endcomment %}
+  {% if page.id and page.related and site.related_posts.size > 0 %}
+  <div class="flex flex-col gap-8">
+    <h2 class="mt-6 mb-4 text-2xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-5xl">{{ site.data.ui-text[site.locale].related_label | default: "You May Also Enjoy" }}
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {% for post in site.related_posts limit:4 %}
+      {% include archive-single.html type="grid" %}
+      {% endfor %}
+    </div>
+  </div>
+  {% comment %}<!-- otherwise show recent posts if no related when `related: true` -->{% endcomment %}
+  {% elsif page.id and page.related %}
+  <div class="flex flex-col gap-8">
+    <h2 class="mt-6 mb-4 text-2xl font-bold tracking-tight text-zinc-800 dark:text-zinc-100 sm:text-xl">{{ site.data.ui-text[site.locale].related_label | default: "You May Also Enjoy" }}
+    </h2>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+      {% for post in site.posts limit:4 %}
+      {% if post.id == page.id %}
+      {% continue %}
+      {% endif %}
+      {% include archive-single.html type="grid" %}
+      {% endfor %}
+    </div>
+  </div>
+  {% endif %}
+</div>
