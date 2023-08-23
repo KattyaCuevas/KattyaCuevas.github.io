@@ -2,7 +2,7 @@
 ---
 
 <!doctype html>
-<html lang="{{ site.locale | slice: 0,2 | default: " en" }}"
+<html lang="{{ site.locale | slice: 0,2 | default: 'en' }}"
   class="no-js bg-zinc-50 text-zinc-950 dark:bg-zinc-900 dark:text-zinc-50">
 
 <head>
@@ -12,41 +12,44 @@
   <meta name="description"
     content="I’m Kattya Cuevas, a software developer with 10 years of experience, a Ruby Peru organizer and a Women Techmakers Ambassador.">
   <link rel="icon" type="image/x-icon" href="{{ logo_path | relative_url }}">
-  <link rel="stylesheet" href="{{ "/assets/css/main.css" | relative_url }}">
+  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
   <link rel="stylesheet" href="/assets/css/syntax_highlighting.css">
 </head>
 
 <body>
   <div class="overflow-hidden">
-    <div>
-      {% include nav-bar.html %}
-      <div class="lg:overflow-y-auto">
-        <div class="relative isolate overflow-hidden px-6 py-24 sm:py-32 lg:overflow-visible lg:px-0">
-          <div class="mx-auto max-w-7xl lg:px-8">
-            <div class="relative px-4 sm:px-8 lg:px-12">
-              {{ content }}
-            </div>
+    {% include nav-bar.html %}
+    <div class="lg:overflow-y-auto">
+      <div class="relative isolate overflow-hidden px-6 py-4 lg:overflow-visible lg:px-0">
+        <div class="mx-auto max-w-7xl lg:px-8">
+          <div class="relative px-4 sm:px-8 lg:px-12">
+            {{ content }}
           </div>
         </div>
       </div>
+    </div>
 
-      <div id="footer" class="">
-        <footer>
-        </footer>
-      </div>
+    <div id="footer" class="">
+      <footer>
+      </footer>
     </div>
   </div>
   <script>
     const closeMainMenu = document.getElementsByName("Close main menu")[0];
+    const openMainMenu = document.getElementsByName("Open main menu")[0];
+
     closeMainMenu.addEventListener("click", () => {
       const menu = document.getElementsByName("Main menu")[0];
       menu.classList.add("hidden");
+      closeMainMenu.classList.add("hidden");
+      openMainMenu.classList.remove("hidden");
     });
 
-    const openMainMenu = document.getElementsByName("Open main menu")[0];
     openMainMenu.addEventListener("click", () => {
       const menu = document.getElementsByName("Main menu")[0];
       menu.classList.remove("hidden");
+      openMainMenu.classList.add("hidden");
+      closeMainMenu.classList.remove("hidden");
     })
   </script>
   <script type="text/javascript" src="https://unpkg.com/mermaid@10.2.2/dist/mermaid.min.js">
