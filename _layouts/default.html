@@ -1,66 +1,68 @@
 ---
 ---
 
-<!doctype html>
-<html lang="{{ site.locale | slice: 0,2 | default: 'en' }}"
-  class="no-js bg-zinc-50 text-zinc-950 dark:bg-zinc-900 dark:text-zinc-50">
+<!DOCTYPE html>
+<html
+  lang="{{ site.locale | slice: 0,2 | default: 'en' }}"
+  class="no-js bg-zinc-50 text-zinc-950 dark:bg-zinc-900 dark:text-zinc-50"
+>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Kattya Cuevas - Software developer, Ruby Peru organizer and a WTM
+      Ambassador
+    </title>
+    <meta
+      name="description"
+      content="I’m Kattya Cuevas, a software developer with 10 years of experience, a Ruby Peru organizer and a Women Techmakers Ambassador."
+    />
+    <link
+      rel="icon"
+      type="image/x-icon"
+      href="{{ logo_path | relative_url }}"
+    />
+    <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}" />
+    <link rel="stylesheet" href="/assets/css/syntax_highlighting.css" />
+  </head>
 
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Kattya Cuevas - Software developer, Ruby Peru organizer and a WTM Ambassador</title>
-  <meta name="description"
-    content="I’m Kattya Cuevas, a software developer with 10 years of experience, a Ruby Peru organizer and a Women Techmakers Ambassador.">
-  <link rel="icon" type="image/x-icon" href="{{ logo_path | relative_url }}">
-  <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
-  <link rel="stylesheet" href="/assets/css/syntax_highlighting.css">
-</head>
-
-<body>
-  <div class="overflow-hidden">
-    {% include nav-bar.html %}
-    <div class="lg:overflow-y-auto">
-      <div class="relative isolate overflow-hidden px-6 py-4 lg:overflow-visible lg:px-0">
-        <div class="mx-auto max-w-7xl lg:px-8">
-          <div class="relative px-4 sm:px-8 lg:px-12">
-            {{ content }}
-          </div>
+  <body>
+    <div class="overflow-hidden">
+      {% include nav-bar.html %}
+      <div class="relative isolate overflow-hidden">
+        <div class="mx-auto max-w-2xl px-10 py-8 md:px-0 lg:max-w-4xl xl:max-w-5xl xl:px-4">
+          {{ content }}
         </div>
       </div>
     </div>
+    <script>
+      const closeMainMenu = document.getElementsByName("Close main menu")[0];
+      const openMainMenu = document.getElementsByName("Open main menu")[0];
 
-    <div id="footer" class="">
-      <footer>
-      </footer>
-    </div>
-  </div>
-  <script>
-    const closeMainMenu = document.getElementsByName("Close main menu")[0];
-    const openMainMenu = document.getElementsByName("Open main menu")[0];
-
-    closeMainMenu.addEventListener("click", () => {
-      const menu = document.getElementsByName("Main menu")[0];
-      menu.classList.add("hidden");
-      closeMainMenu.classList.add("hidden");
-      openMainMenu.classList.remove("hidden");
-    });
-
-    openMainMenu.addEventListener("click", () => {
-      const menu = document.getElementsByName("Main menu")[0];
-      menu.classList.remove("hidden");
-      openMainMenu.classList.add("hidden");
-      closeMainMenu.classList.remove("hidden");
-    })
-  </script>
-  <script type="text/javascript" src="https://unpkg.com/mermaid@10.2.2/dist/mermaid.min.js">
-  </script>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      mermaid.initialize({
-        theme: 'dark'
+      closeMainMenu.addEventListener("click", () => {
+        const menu = document.getElementsByName("Main menu")[0];
+        menu.classList.add("hidden");
+        closeMainMenu.classList.add("hidden");
+        openMainMenu.classList.remove("hidden");
       });
-    });
-  </script>
-</body>
 
+      openMainMenu.addEventListener("click", () => {
+        const menu = document.getElementsByName("Main menu")[0];
+        menu.classList.remove("hidden");
+        openMainMenu.classList.add("hidden");
+        closeMainMenu.classList.remove("hidden");
+      });
+    </script>
+    <script
+      type="text/javascript"
+      src="https://unpkg.com/mermaid@10.2.2/dist/mermaid.min.js"
+    ></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function () {
+        mermaid.initialize({
+          theme: "dark",
+        });
+      });
+    </script>
+  </body>
 </html>

@@ -3,7 +3,7 @@ layout: home
 permalink: /
 ---
 
-<header class="md:flex md:items-center md:justify-between md:gap-12 pt-8 md:pt-10">
+<header class="mt-12 md:flex md:items-center md:justify-between md:gap-12">
   <div>
     <h1 class="text-5xl md:text-6xl font-bold text-zinc-950 dark:text-zinc-100 sm:text-5xl">Hi, I'm Kattya Cuevas!</h1>
     <p class="lg:max-w-prose mt-6 text-lg dark:text-zinc-400 font-light">
@@ -25,7 +25,6 @@ permalink: /
       </a>
     </div>
   </div>
-
 
   <img src="/assets/images/bio-photo.jpg" alt="Kattya Cuevas's photo" class="w-60 rounded-full hidden md:block">
 </header>
