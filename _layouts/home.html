@@ -26,10 +26,10 @@ layout: archive
 
   <hr class="lg:hidden" />
 
-  <div class="rounded-2xl lg:border lg:border-zinc-200 lg:p-6 dark:lg:border-zinc-700/40">
+  <div class="rounded-2xl lg:border lg:border-zinc-200 lg:p-6 dark:lg:border-zinc-700/40 flex flex-col gap-6">
     <h3 class="font-semibold text-xl text-zinc-600 dark:text-zinc-200 mb-2">{{ site.data.ui-text[site.locale].work |
       default: "Work" }}</h3>
-    <ol class="mt-6 space-y-4">
+    <ol class="space-y-4">
       {% for work in site.work_experience %}
         <li class="flex gap-4">
           <div class="relative mt-1 flex h-16 w-16 flex-none items-center justify-center rounded-full shadow-md shadow-zinc-800/5 ring-1 ring-zinc-900/5 dark:border dark:border-zinc-700/50 dark:bg-zinc-800 dark:ring-0">
@@ -48,5 +48,6 @@ layout: archive
         </li>
       {% endfor %}
     </ol>
+    <a href="/KattyaCuevas_CV.pdf" target="_blank" class="bg-zinc-200 hover:bg-zinc-300 px-4 py-2 w-full text-center rounded font-medium">Download CV</a>
   </div>
 </div>
