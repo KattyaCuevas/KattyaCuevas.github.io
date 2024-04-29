@@ -30,6 +30,10 @@ dark_logo                : "/assets/images/dark-logo.png"
 masthead_title           : # overrides the website title displayed in the masthead, use " " for no title
 breadcrumbs              : false # true, false (default)
 work_experience          :
+  - company              : Buk
+    role                 : Software Engineer
+    start_date           : 03/2024
+    end_date             : Now
   - company              : Shopify
     role                 : Software Developer
     start_date           : 05/2022
